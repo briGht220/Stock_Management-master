@@ -10,7 +10,7 @@ from module.StockManage import StockManage
 # 윈도우 화면 초기화  
 def windowInit() -> tkinter.Tk:
     root = tkinter.Tk()
-    root.geometry('800x500+300+100')
+    root.geometry('1000x500+300+100')
     root.title('Stock Management')
 
     return root
@@ -70,19 +70,19 @@ def insertData() -> None:
 # 데이터를 텍스트 화면에 띄어주는 함수
 def showAllData() -> None:
     global textShowData
+    classOBJ = ('Name', 'Count', 'Limit_day', 'In_day', 'Out_day', 'Company')
 
     slist = StockList.getStockList()
-    cnt = 0
     line = ''
 
     for i in slist:
-        line += str(cnt) + '.  '
         stock = i.returnByList()
+        cnt = 0
 
         for j in stock:
-            line += j + ' '
+            line += classOBJ[cnt] + ': %7s  |  ' %(j)
+            cnt += 1
         
-        cnt += 1
         line += '\n'
 
     textShowData.configure(state='normal')
@@ -112,7 +112,7 @@ if __name__ == '__main__':
     # 버튼  
     buttonShowList = tkinter.Button(frameleft, text='Show All List', command=showAllData)
     buttonInsert = tkinter.Button(frameleft, text='Insert data', command=insertData)
-    buttonSave = tkinter.Button(frameleft, text='Save Data')
+    # buttonSave = tkinter.Button(frameleft, text='Save Data')
     buttonQuit = tkinter.Button(frameleft, text='Exit Programm', command=tkinterClose)
 
     # 스크롤 바 
@@ -127,12 +127,12 @@ if __name__ == '__main__':
     xscroll.config(command=textShowData.xview)
 
     # 버튼 커맨드 설정  
-    buttonSave.config(command=lambda: StockList.saveData(textShowData.get(1.0, tkinter.END)))
+    # buttonSave.config(command=lambda: StockList.saveData(textShowData.get(1.0, tkinter.END)))
 
     # 붙여넣기 부분  
     buttonShowList.pack(side='top', fill='x', padx=10, pady=10)
     buttonInsert.pack(side='top', fill='x', padx=10, pady=10)
-    buttonSave.pack(side='top', fill='x', padx=10, pady=10)
+    # buttonSave.pack(side='top', fill='x', padx=10, pady=10)
     buttonQuit.pack(side='bottom', fill='x', padx=10, pady=10)
     textShowData.pack(anchor='center', fill='both')
 
