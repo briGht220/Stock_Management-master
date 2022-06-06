@@ -12,24 +12,6 @@ class StockList:
     def appendData(stock: Stock) -> None:
         StockList.sList.append(stock)
 
-    # 데이터를 저장하는 함수 (사용 안함)
-    def saveData(data: str) -> None:
-        saveFile = open('./data.txt', 'w')
-        line = str.split('\n')
-
-        for i in line:
-            line__ = i.split()
-            line___ = ''
-
-            for j in line__[1::2]:
-                line___ += j + ' '
-            
-            saveFile.write(line___)
-
-        tkinter.messagebox.showinfo('Info', 'Data saved')
-
-        saveFile.close()
-
     # 데이터베이스로부터 데이터를 가져오는 함수
     def getDataFromDatabase() -> None:
         StockList.sList = []

@@ -26,7 +26,7 @@ def insertDataCommand(stock: Stock) -> None:
 def insertData() -> None:
     global root
 
-    # 새로운 윈도우 생서
+    # 새로운 윈도우 생성
     insertWindow = tkinter.Toplevel(root)
     insertWindow.geometry('300x300')
     insertWindow.title('InsertData')
@@ -82,7 +82,7 @@ def deleteDataCommand(index: str) -> None:
 def deleteData() -> None:
     global root
 
-    # 새로운 윈도우 생서
+    # 새로운 윈도우 생성
     deleteWindow = tkinter.Toplevel(root)
     deleteWindow.geometry('300x100+300+300')
     deleteWindow.title('DeleteData')
