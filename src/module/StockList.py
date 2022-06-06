@@ -55,3 +55,6 @@ class StockList:
     def getStockList() -> None:
         return StockList.sList
 
+    def popStock(index: int) -> None:
+        StockList.sList.pop(index)
+

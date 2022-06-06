@@ -15,7 +15,7 @@ def windowInit() -> tkinter.Tk:
 
     return root
 
-1
+
 def insertDataCommand(stock: Stock) -> None:
     StockManage.appendStock(stock)
     tkinter.messagebox.showinfo('Info', 'Data Inserted')
@@ -67,6 +67,39 @@ def insertData() -> None:
     ))).pack(side='bottom', padx=10, pady=10)
 
 
+def deleteDataCommand(index: str) -> None:
+    try:
+        index_num = int(index)
+    except:
+        tkinter.messagebox.showerror('Value Error', 'Check value type (index : int)')
+        return
+
+    StockManage.deleteStock(index_num)
+    tkinter.messagebox.showinfo('Info', 'Data Deleted')
+    showAllData()
+
+
+def deleteData() -> None:
+    global root
+
+    # 새로운 윈도우 생서
+    deleteWindow = tkinter.Toplevel(root)
+    deleteWindow.geometry('300x100+300+300')
+    deleteWindow.title('DeleteData')
+
+    # frame 선언 부
+    frameleft = tkinter.Frame(deleteWindow)
+    frameleft.pack(side='left', fill='y')
+
+    # label, entry 생성 부
+    tkinter.Label(frameleft, text='Index').pack(fill='x', padx=10, pady=10)
+    indexEntry = tkinter.Entry(deleteWindow)
+    indexEntry.pack(fill='x', padx=10, pady=11)
+
+    #버튼 생성
+    tkinter.Button(deleteWindow, text='Delete Data', command=lambda: deleteDataCommand(indexEntry.get())).pack(side='bottom', padx=10, pady=10)
+
+
 # 데이터를 텍스트 화면에 띄어주는 함수
 def showAllData() -> None:
     global textShowData
@@ -112,8 +145,8 @@ if __name__ == '__main__':
     # 버튼  
     buttonShowList = tkinter.Button(frameleft, text='Show All List', command=showAllData)
     buttonInsert = tkinter.Button(frameleft, text='Insert data', command=insertData)
-    # buttonSave = tkinter.Button(frameleft, text='Save Data')
     buttonQuit = tkinter.Button(frameleft, text='Exit Programm', command=tkinterClose)
+    buttonDelete = tkinter.Button(frameleft, text='Delete data', command=deleteData)
 
     # 스크롤 바 
     yscroll = tkinter.Scrollbar(root)
@@ -127,12 +160,11 @@ if __name__ == '__main__':
     xscroll.config(command=textShowData.xview)
 
     # 버튼 커맨드 설정  
-    # buttonSave.config(command=lambda: StockList.saveData(textShowData.get(1.0, tkinter.END)))
 
     # 붙여넣기 부분  
     buttonShowList.pack(side='top', fill='x', padx=10, pady=10)
     buttonInsert.pack(side='top', fill='x', padx=10, pady=10)
-    # buttonSave.pack(side='top', fill='x', padx=10, pady=10)
+    buttonDelete.pack(side='top', fill='x', padx=10, pady=10)
     buttonQuit.pack(side='bottom', fill='x', padx=10, pady=10)
     textShowData.pack(anchor='center', fill='both')
 
