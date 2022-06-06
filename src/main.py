@@ -103,19 +103,23 @@ def deleteData() -> None:
 # 데이터를 텍스트 화면에 띄어주는 함수
 def showAllData() -> None:
     global textShowData
-    classOBJ = ('Name', 'Count', 'Limit_day', 'In_day', 'Out_day', 'Company')
 
+    classOBJ = ('Name', 'Count', 'Limit_day', 'In_day', 'Out_day', 'Company')
     slist = StockList.getStockList()
+    cnt_num = 0
     line = ''
 
     for i in slist:
         stock = i.returnByList()
         cnt = 0
 
+        line += '| ' + str(cnt_num) + ' | '
+
         for j in stock:
-            line += classOBJ[cnt] + ': %7s  |  ' %(j)
+            line += classOBJ[cnt] + ': %7s | ' %(j)
             cnt += 1
         
+        cnt_num += 1
         line += '\n'
 
     textShowData.configure(state='normal')
