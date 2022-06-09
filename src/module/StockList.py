@@ -38,5 +38,5 @@ class StockList:
         return StockList.sList
 
     def popStock(index: int) -> None:
-        StockList.sList.pop(index)
+        del StockList.sList[index]
 

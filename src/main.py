@@ -10,7 +10,7 @@ from module.StockManage import StockManage
 # 윈도우 화면 초기화  
 def windowInit() -> tkinter.Tk:
     root = tkinter.Tk()
-    root.geometry('1000x500+300+100')
+    root.geometry('1300x500+300+100')
     root.title('Stock Management')
 
     return root
@@ -26,7 +26,7 @@ def insertDataCommand(stock: Stock) -> None:
 def insertData() -> None:
     global root
 
-    # 새로운 윈도우 생성
+    # 새로운 윈도우 생서
     insertWindow = tkinter.Toplevel(root)
     insertWindow.geometry('300x300')
     insertWindow.title('InsertData')
@@ -82,7 +82,7 @@ def deleteDataCommand(index: str) -> None:
 def deleteData() -> None:
     global root
 
-    # 새로운 윈도우 생성
+    # 새로운 윈도우 생서
     deleteWindow = tkinter.Toplevel(root)
     deleteWindow.geometry('300x100+300+300')
     deleteWindow.title('DeleteData')
@@ -104,6 +104,8 @@ def deleteData() -> None:
 def showAllData() -> None:
     global textShowData
 
+    StockList.getDataFromDatabase()
+
     classOBJ = ('Name', 'Count', 'Limit_day', 'In_day', 'Out_day', 'Company')
     slist = StockList.getStockList()
     cnt_num = 0
@@ -113,10 +115,10 @@ def showAllData() -> None:
         stock = i.returnByList()
         cnt = 0
 
-        line += '| ' + str(cnt_num) + ' | '
+        line += '| ' + '%03d' %(cnt_num) + ' | '
 
         for j in stock:
-            line += classOBJ[cnt] + ': %7s | ' %(j)
+            line += classOBJ[cnt] + ': %15s | ' %(j)
             cnt += 1
         
         cnt_num += 1
@@ -162,8 +164,6 @@ if __name__ == '__main__':
     textShowData = tkinter.Text(root, height=80, yscrollcommand=yscroll.set, xscrollcommand=xscroll.set, state='disable')
     yscroll.config(command=textShowData.yview)
     xscroll.config(command=textShowData.xview)
-
-    # 버튼 커맨드 설정  
 
     # 붙여넣기 부분  
     buttonShowList.pack(side='top', fill='x', padx=10, pady=10)
