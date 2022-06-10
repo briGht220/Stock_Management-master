@@ -39,5 +39,8 @@ class StockList:
         return StockList.sList
 
     def popStock(index: int) -> None:
-        del StockList.sList[index]
+        try:
+            del StockList.sList[index]
+        except:
+            tkinter.messagebox.showerror('Error', 'Out of range.')
 
