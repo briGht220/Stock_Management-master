@@ -19,7 +19,8 @@ class StockList:
         try:
             database = open('./data.txt', 'r')
         except:
-            tkinter.messagebox.showwarning('Warning', 'There\'s no database')
+            tkinter.messagebox.showwarning('Warning', 'There\'s no database. Create new database.')
+            database = open('./data.txt', 'w')
             return
         
         data = database.readlines()
